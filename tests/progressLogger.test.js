@@ -78,7 +78,7 @@ describe('progress logger', () => {
         setTimeout(() => {
             logger.stopLogging();
             expect(logFunction).toHaveBeenCalledTimes(5);
-        }, 500);
+        }, 450);
     });
 
     it('starts logging on tick logging', () => {
