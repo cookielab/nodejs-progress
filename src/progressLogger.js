@@ -24,9 +24,6 @@ class ProgressLogger implements Progress {
 
     stop(): void {
         this.tracker.stop();
-        if (this.logCallback != null) {
-            this.logCallback();
-        }
         this.stopLogging();
     }
 

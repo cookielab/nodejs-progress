@@ -6,7 +6,7 @@ class ProgressTracker implements Progress {
     total: number;
     current: number;
     startTime: number;
-    endTime: number;
+    endTime: ?number;
 
     constructor(total: number): void {
         this.total = total;
@@ -16,6 +16,7 @@ class ProgressTracker implements Progress {
 
     start(): void {
         this.startTime = Date.now();
+        this.endTime = null;
     }
 
     stop(): void {
