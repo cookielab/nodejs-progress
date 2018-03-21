@@ -1,5 +1,5 @@
 // @flow
 
-import ProgressLogger from './progressLogger';
+import ProgressLogger from './ProgressLogger';
 
 export default ProgressLogger;
