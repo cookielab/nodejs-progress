@@ -89,11 +89,11 @@ describe('progress tracker', () => {
     });
 
     it('returns estimated time of completeness', () => {
+        const elapsedTime = 10 * 1000; // 10s
         const tracker = new ProgressTracker(itemsCount);
-        expect(tracker.getEtaTime()).toBe(NaN);
-        setTimeout(() => {
-            tracker.tick(itemsCount / 2); // 50 %
-            expect(tracker.getEtaTime()).toBeGreaterThanOrEqual(500);
-        }, 500);
+        expect(tracker.getEtaTime()).toBeNull();
+        tracker.startTime = tracker.startTime - elapsedTime;
+        tracker.tick(itemsCount / 2); // 50 %
+        expect(tracker.getEtaTime()).toBeGreaterThanOrEqual(elapsedTime);
     });
 });

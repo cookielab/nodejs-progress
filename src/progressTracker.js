@@ -44,8 +44,11 @@ class ProgressTracker implements Progress {
             : this.endTime - this.startTime;
     }
 
-    getEtaTime(): number {
-        return this.getRemainingPercentage() * this.getRunningTime() / this.getPercentage();
+    getEtaTime(): ?number {
+        const etaTime = this.getRemainingPercentage() * this.getRunningTime() / this.getPercentage();
+        return Number.isFinite(etaTime) && !Number.isNaN(etaTime)
+            ? etaTime
+            : null;
     }
 }
 

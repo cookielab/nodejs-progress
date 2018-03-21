@@ -122,7 +122,7 @@ describe('progress logger', () => {
         const getEtaTimeSpy = jest.spyOn(logger.tracker, 'getEtaTime');
         logger.message(3);
         expect(formatMessageSpy).toHaveBeenCalledTimes(1);
-        expect(formatMessageSpy).toHaveBeenCalledWith(expect.anything(), expect.anything(), expect.anything(), 3);
+        expect(formatMessageSpy).toHaveBeenCalledWith(expect.anything(), expect.anything(), null, 3);
         expect(getPercentageSpy).toHaveBeenCalledTimes(3);
         expect(getRunningTimeSpy).toHaveBeenCalledTimes(2);
         expect(getEtaTimeSpy).toHaveBeenCalledTimes(1);
