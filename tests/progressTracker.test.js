@@ -1,4 +1,4 @@
-import {ProgressTracker} from '../src/progressTracker';
+import ProgressTracker from '../src/progressTracker';
 
 describe('progress tracker', () => {
     const itemsCount = 100;

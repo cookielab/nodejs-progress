@@ -52,6 +52,4 @@ class ProgressTracker implements Progress {
     }
 }
 
-export {
-    ProgressTracker,
-};
+export default ProgressTracker;

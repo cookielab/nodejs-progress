@@ -1,6 +1,6 @@
 import * as messageFormatter from '../src/messageFormatter';
-import {ProgressLogger} from '../src';
-import {ProgressTracker} from '../src/progressTracker';
+import ProgressLogger from '../src';
+import ProgressTracker from '../src/progressTracker';
 
 describe('progress logger', () => {
     const itemsCount = 100;

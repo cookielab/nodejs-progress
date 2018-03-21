@@ -1,7 +1,7 @@
 // @flow
 
 import * as messageFormatter from './messageFormatter';
-import {ProgressTracker} from './progressTracker';
+import ProgressTracker from './progressTracker';
 import type {Progress} from './progress';
 
 type LogFunction = (string) => void;
@@ -65,6 +65,4 @@ class ProgressLogger implements Progress {
     }
 }
 
-export {
-    ProgressLogger,
-};
+export default ProgressLogger;
