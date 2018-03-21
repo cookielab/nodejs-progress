@@ -24,7 +24,7 @@ class ProgressLogger implements Progress {
 
     stop(): void {
         this.tracker.stop();
-        this.stopLogging();
+        this.disableLogging();
     }
 
     tick(count: number = 1): void {
@@ -34,17 +34,17 @@ class ProgressLogger implements Progress {
         }
     }
 
-    startIntervalLogging(logFunction: LogFunction, interval: number): void {
+    enableIntervalLogging(logFunction: LogFunction, interval: number): void {
         this.logCallback = () => logFunction(this.message());
         this.intervalID = setInterval(this.logCallback, interval);
     }
 
-    startOnTickLogging(logFunction: LogFunction): void {
+    enableOnTickLogging(logFunction: LogFunction): void {
         this.logCallback = () => logFunction(this.message());
         this.logCallback();
     }
 
-    stopLogging(): void {
+    disableLogging(): void {
         if (this.intervalID != null) {
             clearInterval(this.intervalID);
         }

@@ -32,9 +32,9 @@ describe('progress logger', () => {
         expect(logCallback).toHaveBeenCalledTimes(1);
     });
 
-    it('stops logging on stop call', () => {
+    it('disables logging on stop call', () => {
         const logger = new ProgressLogger(itemsCount);
-        const stopLoggingSpy = jest.spyOn(logger, 'stopLogging');
+        const stopLoggingSpy = jest.spyOn(logger, 'disableLogging');
         logger.stop();
         expect(stopLoggingSpy).toHaveBeenCalledTimes(1);
     });
@@ -54,65 +54,65 @@ describe('progress logger', () => {
         expect(logCallback).toHaveBeenCalledTimes(1);
     });
 
-    it('starts logging on interval logging', () => {
+    it('enables logging for interval', () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
-        logger.startIntervalLogging(logFunction, 100);
+        logger.enableIntervalLogging(logFunction, 100);
         expect(logger.logCallback).not.toBeNull();
         expect(logger.intervalID).not.toBeNull();
-        logger.stopLogging();
+        logger.disableLogging();
     });
 
-    it('starts logging on interval logging without direct log call', () => {
+    it('enables logging for interval without direct log call', () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
-        logger.startIntervalLogging(logFunction, 100);
+        logger.enableIntervalLogging(logFunction, 100);
         expect(logFunction).toHaveBeenCalledTimes(0);
-        logger.stopLogging();
+        logger.disableLogging();
     });
 
     it('logs on interval if it is turned on', async () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
-        logger.startIntervalLogging(logFunction, 100);
+        logger.enableIntervalLogging(logFunction, 100);
         await new Promise((resolve) => {
             setTimeout(() => {
-                logger.stopLogging();
+                logger.disableLogging();
                 expect(logFunction).toHaveBeenCalledTimes(5);
                 resolve();
             }, 450);
         });
     });
 
-    it('starts logging on tick logging', () => {
+    it('enables logging for tick', () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
-        logger.startOnTickLogging(logFunction);
+        logger.enableOnTickLogging(logFunction);
         expect(logger.logCallback).not.toBeNull();
         expect(logger.intervalID).toBeNull();
     });
 
-    it('starts logging on tick logging with direct log call', () => {
+    it('enables logging for tick with direct log call', () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
-        logger.startOnTickLogging(logFunction);
+        logger.enableOnTickLogging(logFunction);
         expect(logFunction).toHaveBeenCalledTimes(1);
     });
 
-    it('stops logging for interval logging', () => {
+    it('disables logging for interval', () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
-        logger.startIntervalLogging(logFunction, 100);
-        logger.stopLogging();
+        logger.enableIntervalLogging(logFunction, 100);
+        logger.disableLogging();
         expect(logger.logCallback).toBeNull();
         expect(logger.intervalID).toBeNull();
     });
 
-    it('stops logging for tick logging', () => {
+    it('disables logging for tick', () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
-        logger.startOnTickLogging(logFunction, 100);
-        logger.stopLogging();
+        logger.enableOnTickLogging(logFunction, 100);
+        logger.disableLogging();
         expect(logger.logCallback).toBeNull();
         expect(logger.intervalID).toBeNull();
     });
