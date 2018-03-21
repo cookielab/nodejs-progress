@@ -71,14 +71,17 @@ describe('progress logger', () => {
         logger.stopLogging();
     });
 
-    it('logs on interval if it is turned on', () => {
+    it('logs on interval if it is turned on', async () => {
         const logger = new ProgressLogger(itemsCount);
         const logFunction = jest.fn();
         logger.startIntervalLogging(logFunction, 100);
-        setTimeout(() => {
-            logger.stopLogging();
-            expect(logFunction).toHaveBeenCalledTimes(5);
-        }, 450);
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                logger.stopLogging();
+                expect(logFunction).toHaveBeenCalledTimes(5);
+                resolve();
+            }, 450);
+        });
     });
 
     it('starts logging on tick logging', () => {

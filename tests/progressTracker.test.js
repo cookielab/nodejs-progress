@@ -8,13 +8,16 @@ describe('progress tracker', () => {
         expect(tracker.startTime).not.toBeNull();
     });
 
-    it('changes start time on "start" method call', () => {
+    it('changes start time on "start" method call', async () => {
         const tracker = new ProgressTracker(itemsCount);
         const originalStart = tracker.startTime;
-        setTimeout(() => {
-            tracker.start();
-            expect(tracker.startTime - originalStart).toBeGreaterThanOrEqual(500);
-        }, 500);
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                tracker.start();
+                expect(tracker.startTime - originalStart).toBeGreaterThanOrEqual(500);
+                resolve();
+            }, 500);
+        });
     });
 
     it('saves end time on "stop" method call', () => {
@@ -67,25 +70,31 @@ describe('progress tracker', () => {
         expect(tracker.getRemainingPercentage()).toBe(50);
     });
 
-    it('returns time of running without "stop" method call', () => {
+    it('returns time of running without "stop" method call', async () => {
         const tracker = new ProgressTracker(itemsCount);
         expect(tracker.getRunningTime()).toBe(0);
-        setTimeout(() => {
-            expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
-        }, 500);
-    });
-
-    it('returns time of running with "stop" method call', () => {
-        const tracker = new ProgressTracker(itemsCount);
-        expect(tracker.getRunningTime()).toBe(0);
-        setTimeout(() => {
-            tracker.stop();
-            expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
+        await new Promise((resolve) => {
             setTimeout(() => {
                 expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
-                expect(tracker.getRunningTime()).toBeLessThan(1000);
+                resolve();
             }, 500);
-        }, 500);
+        });
+    });
+
+    it('returns time of running with "stop" method call', async () => {
+        const tracker = new ProgressTracker(itemsCount);
+        expect(tracker.getRunningTime()).toBe(0);
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                tracker.stop();
+                expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
+                setTimeout(() => {
+                    expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
+                    expect(tracker.getRunningTime()).toBeLessThan(1000);
+                    resolve();
+                }, 500);
+            }, 500);
+        });
     });
 
     it('returns estimated time of completeness', () => {
