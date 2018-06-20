@@ -1,4 +1,6 @@
 bin/
+coverage/
+node_modules/
 src/
 tests/
 .babelrc
@@ -6,3 +8,5 @@ tests/
 .flowconfig
 .gitignore
 .gitlab-ci.yml
+yarn.lock
+package-lock.json
