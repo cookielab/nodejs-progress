@@ -2,6 +2,10 @@
     "name": "@cookielab.io/progress",
     "version": "1.0.0",
     "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/cookielab/nodejs-progress.git"
+    },
     "main": "lib/index.js",
     "scripts": {
         "build": "bin/build",
