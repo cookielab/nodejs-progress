@@ -1,9 +1,9 @@
 // @flow
 
 export interface Progress {
-    start(): void;
+    start(): void,
 
-    stop(): void;
+    stop(): void,
 
-    tick(count: number): void;
+    tick(count: number): void,
 }
