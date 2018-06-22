@@ -45,8 +45,6 @@ test:
     - docker
   dependencies:
     - yarn
-  services:
-    - postgres
   script:
     - bin/jest --coverage
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
