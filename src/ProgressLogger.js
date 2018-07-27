@@ -2,18 +2,21 @@
 
 import * as messageFormatter from './messageFormatter';
 import ProgressTracker from './ProgressTracker';
+import RateTracker from './RateTracker';
 import type {Progress} from './progress';
 
 type LogFunction = (string) => void;
 type LogCallback = () => void;
 
 class ProgressLogger implements Progress {
-    tracker: ProgressTracker;
+    tracker: ProgressTracker | RateTracker;
     intervalID: ?IntervalID;
     logCallback: ?LogCallback;
 
-    constructor(total: number): void {
-        this.tracker = new ProgressTracker(total);
+    constructor(total?: number): void {
+        this.tracker = total != null
+            ? new ProgressTracker(total)
+            : new RateTracker();
         this.intervalID = null;
         this.logCallback = null;
     }
@@ -55,13 +58,8 @@ class ProgressLogger implements Progress {
         this.logCallback = null;
     }
 
-    message(precision: number = 3): string {
-        return messageFormatter.formatMessage(
-            this.tracker.getPercentage(),
-            this.tracker.getRunningTime(),
-            this.tracker.getEtaTime(),
-            precision
-        );
+    message(precision?: number): string {
+        return messageFormatter.format(this.tracker, precision);
     }
 }
 

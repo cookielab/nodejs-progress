@@ -1,6 +1,7 @@
 import * as messageFormatter from '../src/messageFormatter';
 import ProgressLogger from '../src/ProgressLogger';
 import ProgressTracker from '../src/ProgressTracker';
+import RateTracker from '../src/RateTracker';
 
 describe('progress logger', () => {
     const itemsCount = 100;
@@ -117,17 +118,17 @@ describe('progress logger', () => {
         expect(logger.intervalID).toBeNull();
     });
 
-    it('creates message using message formatter passing precision parameter', () => {
+    it('creates progress message using message formatter passing precision parameter', () => {
         const logger = new ProgressLogger(itemsCount);
-        const formatMessageSpy = jest.spyOn(messageFormatter, 'formatMessage');
-        const getPercentageSpy = jest.spyOn(logger.tracker, 'getPercentage');
-        const getRunningTimeSpy = jest.spyOn(logger.tracker, 'getRunningTime');
-        const getEtaTimeSpy = jest.spyOn(logger.tracker, 'getEtaTime');
+        const formatMessageSpy = jest.spyOn(messageFormatter, 'format');
         logger.message(3);
-        expect(formatMessageSpy).toHaveBeenCalledTimes(1);
-        expect(formatMessageSpy).toHaveBeenCalledWith(expect.anything(), expect.anything(), null, 3);
-        expect(getPercentageSpy).toHaveBeenCalledTimes(3);
-        expect(getRunningTimeSpy).toHaveBeenCalledTimes(2);
-        expect(getEtaTimeSpy).toHaveBeenCalledTimes(1);
+        expect(formatMessageSpy).toHaveBeenCalledWith(expect.any(ProgressTracker), 3);
+    });
+
+    it('creates rate message using message formatter passing precision parameter', () => {
+        const logger = new ProgressLogger();
+        const formatMessageSpy = jest.spyOn(messageFormatter, 'format');
+        logger.message(0);
+        expect(formatMessageSpy).toHaveBeenCalledWith(expect.any(RateTracker), 0);
     });
 });
