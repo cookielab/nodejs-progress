@@ -1,58 +1,58 @@
 {
-    "name": "@cookielab.io/progress",
-    "version": "1.2.0",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/cookielab/nodejs-progress.git"
-    },
-    "main": "lib/index.js",
-    "scripts": {
-        "build": "bin/build",
-        "watch": "bin/watch",
-        "lint": "bin/lint || true",
-        "flow": "bin/flow || true",
-        "test": "bin/jest",
-        "check-all": "bin/check-all || true",
-        "prepare": "bin/build"
-    },
-    "engines": {
-        "node": ">=8.0.0"
-    },
-    "dependencies": {
-        "pretty-bytes": "^5.1.0",
-        "pretty-ms": "^3.2.0"
-    },
-    "devDependencies": {
-        "@cookielab.io/eslint-config-server": "0.1.0",
-        "@cookielab.io/eslint-plugin-custom-rules": "0.1.0",
-        "babel-cli": "6.26.0",
-        "babel-core": "6.26.3",
-        "babel-eslint": "8.2.6",
-        "babel-jest": "23.4.2",
-        "babel-plugin-transform-flow-strip-types": "6.22.0",
-        "babel-preset-node8": "1.2.0",
-        "eslint": "5.2.0",
-        "eslint-plugin-filenames": "1.3.2",
-        "eslint-plugin-flowtype": "2.50.0",
-        "eslint-plugin-import": "2.13.0",
-        "flow-bin": "0.77.0",
-        "flow-copy-source": "2.0.2",
-        "flow-typed": "2.5.1",
-        "jest": "23.4.2"
-    },
-    "jest": {
-        "roots": [
-            "<rootDir>/src",
-            "<rootDir>/tests"
-        ],
-        "coveragePathIgnorePatterns": [
-            "/node_modules/",
-            "/tests/bootstrap.js"
-        ],
-        "testEnvironment": "node",
-        "collectCoverageFrom": [
-            "src/**/*.{js,flow}"
-        ]
-    }
+  "name": "@cookielab.io/progress",
+  "version": "1.2.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cookielab/nodejs-progress.git"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "bin/build",
+    "watch": "bin/watch",
+    "lint": "bin/lint || true",
+    "flow": "bin/flow || true",
+    "test": "bin/jest",
+    "check-all": "bin/check-all || true",
+    "prepare": "bin/build"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "pretty-bytes": "^5.1.0",
+    "pretty-ms": "^3.2.0"
+  },
+  "devDependencies": {
+    "@cookielab.io/eslint-config-server": "0.1.0",
+    "@cookielab.io/eslint-plugin-custom-rules": "0.1.0",
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.3",
+    "babel-eslint": "8.2.6",
+    "babel-jest": "23.4.2",
+    "babel-plugin-transform-flow-strip-types": "6.22.0",
+    "babel-preset-node8": "1.2.0",
+    "eslint": "5.2.0",
+    "eslint-plugin-filenames": "1.3.2",
+    "eslint-plugin-flowtype": "2.50.0",
+    "eslint-plugin-import": "2.13.0",
+    "flow-bin": "0.77.0",
+    "flow-copy-source": "2.0.2",
+    "flow-typed": "2.5.1",
+    "jest": "23.4.2"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/tests"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/bootstrap.js"
+    ],
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.{js,flow}"
+    ]
+  }
 }
