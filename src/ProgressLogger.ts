@@ -1,19 +1,22 @@
-// @flow
-
 import * as messageFormatter from './messageFormatter';
 import ProgressTracker from './ProgressTracker';
 import RateTracker from './RateTracker';
-import type {Progress} from './progress';
+import {Progress} from './progress';
 
-type LogFunction = (string) => void;
-type LogCallback = () => void;
+interface LogFunction {
+    (message: string): void;
+}
 
-class ProgressLogger implements Progress {
-    tracker: ProgressTracker | RateTracker;
-    intervalID: ?IntervalID;
-    logCallback: ?LogCallback;
+interface LogCallback {
+    (): void;
+}
 
-    constructor(total?: number): void {
+export default class ProgressLogger implements Progress {
+    private readonly tracker: ProgressTracker | RateTracker;
+    private intervalID: NodeJS.Timer | null;
+    private logCallback: LogCallback | null;
+
+    constructor(total?: number) {
         this.tracker = total != null
             ? new ProgressTracker(total)
             : new RateTracker();
@@ -62,5 +65,3 @@ class ProgressLogger implements Progress {
         return messageFormatter.format(this.tracker, precision);
     }
 }
-
-export default ProgressLogger;

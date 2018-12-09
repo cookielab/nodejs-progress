@@ -5,25 +5,35 @@ describe('progress tracker', () => {
 
     it('starts on creation', () => {
         const tracker = new ProgressTracker(itemsCount);
+
+        // @ts-ignore
         expect(tracker.startTime).not.toBeNull();
     });
 
     it('changes start time on "start" method call', async () => {
         const tracker = new ProgressTracker(itemsCount);
+
+        // @ts-ignore
         const originalStart = tracker.startTime;
         await new Promise((resolve) => {
             setTimeout(() => {
                 tracker.start();
-                expect(tracker.startTime - originalStart).toBeGreaterThanOrEqual(500);
                 resolve();
             }, 500);
         });
+
+        // @ts-ignore
+        expect(tracker.startTime - originalStart).toBeGreaterThanOrEqual(500);
     });
 
     it('saves end time on "stop" method call', () => {
         const tracker = new ProgressTracker(itemsCount);
+
+        // @ts-ignore
         expect(tracker.endTime).toBeNull();
         tracker.stop();
+
+        // @ts-ignore
         expect(tracker.endTime).not.toBeNull();
     });
 
@@ -31,28 +41,40 @@ describe('progress tracker', () => {
         const tracker = new ProgressTracker(itemsCount);
         tracker.stop();
         tracker.start();
+
+        // @ts-ignore
         expect(tracker.endTime).toBeNull();
     });
 
     it('adds one tick on "tick" method call', () => {
         const tracker = new ProgressTracker(itemsCount);
         tracker.tick();
+
+        // @ts-ignore
         expect(tracker.current).toBe(1);
         tracker.tick();
+
+        // @ts-ignore
         expect(tracker.current).toBe(2);
     });
 
     it('adds specified count of ticks on "tick" method call', () => {
         const tracker = new ProgressTracker(itemsCount);
         tracker.tick(5);
+
+        // @ts-ignore
         expect(tracker.current).toBe(5);
         tracker.tick(8);
+
+        // @ts-ignore
         expect(tracker.current).toBe(13);
     });
 
     it('does not adds more than total count on "tick" method call', () => {
         const tracker = new ProgressTracker(itemsCount);
         tracker.tick(itemsCount + 1); // N + 1
+
+        // @ts-ignore
         expect(tracker.current).toBe(itemsCount);
     });
 
@@ -72,35 +94,38 @@ describe('progress tracker', () => {
 
     it('returns time of running without "stop" method call', async () => {
         const tracker = new ProgressTracker(itemsCount);
-        expect(tracker.getRunningTime()).toBe(0);
+        expect(tracker.getRunningTime()).toBeLessThanOrEqual(1);
         await new Promise((resolve) => {
             setTimeout(() => {
-                expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
                 resolve();
             }, 500);
         });
+        expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
     });
 
     it('returns time of running with "stop" method call', async () => {
         const tracker = new ProgressTracker(itemsCount);
-        expect(tracker.getRunningTime()).toBe(0);
+        expect(tracker.getRunningTime()).toBeLessThanOrEqual(1);
         await new Promise((resolve) => {
             setTimeout(() => {
                 tracker.stop();
                 expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
+                expect(tracker.getRunningTime()).toBeLessThan(1000);
                 setTimeout(() => {
-                    expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
-                    expect(tracker.getRunningTime()).toBeLessThan(1000);
                     resolve();
                 }, 500);
             }, 500);
         });
+        expect(tracker.getRunningTime()).toBeGreaterThanOrEqual(500);
+        expect(tracker.getRunningTime()).toBeLessThan(1000);
     });
 
     it('returns estimated time of completeness', () => {
         const elapsedTime = 10 * 1000; // 10s
         const tracker = new ProgressTracker(itemsCount);
         expect(tracker.getEtaTime()).toBeNull();
+
+        // @ts-ignore
         tracker.startTime = tracker.startTime - elapsedTime;
         tracker.tick(itemsCount / 2); // 50 %
         expect(tracker.getEtaTime()).toBeGreaterThanOrEqual(elapsedTime);

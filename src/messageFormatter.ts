@@ -1,5 +1,3 @@
-// @flow
-
 import prettyBytes from 'pretty-bytes';
 import prettyMs from 'pretty-ms';
 import ProgressTracker from './ProgressTracker';
@@ -10,7 +8,7 @@ const formatMemory = (): string => {
     return `Memory usage: ${prettyBytes(memory)}`;
 };
 
-const formatProgress = (percentage: number, runningTime: number, etaTime: ?number, precision: number = 3): string => {
+const formatProgress = (percentage: number, runningTime: number, etaTime: number | null, precision: number = 3): string => {
     const etaFormatted = etaTime != null ? prettyMs(etaTime) : 'calculating';
     return `Progress: ${percentage.toFixed(precision)}% Running: ${prettyMs(runningTime)} Eta: ${etaFormatted} ${formatMemory()}`;
 };
@@ -33,6 +31,7 @@ const format = (tracker: ProgressTracker | RateTracker, precision?: number): str
         return formatRate(tracker.getCurrent(), tracker.getOperationsPerSecond(), tracker.getRunningTime(), precision != null ? precision : 0);
     }
 
+    // @ts-ignore
     throw new Error(`Unexpected instance of tracker "${tracker.constructor.name}".`);
 };
 

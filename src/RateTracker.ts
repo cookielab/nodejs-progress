@@ -1,15 +1,14 @@
-// @flow
+import {Progress} from './progress';
 
-import type {Progress} from './progress';
+export default class RateTracker implements Progress {
+    private current: number;
+    private startTime: number;
+    private endTime: number | null;
 
-class RateTracker implements Progress {
-    current: number;
-    startTime: number;
-    endTime: ?number;
-
-    constructor(): void {
+    constructor() {
         this.current = 0;
-        this.start();
+        this.startTime = Date.now();
+        this.endTime = null;
     }
 
     start(): void {
@@ -40,5 +39,3 @@ class RateTracker implements Progress {
             : this.endTime - this.startTime;
     }
 }
-
-export default RateTracker;

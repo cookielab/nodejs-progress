@@ -1,17 +1,16 @@
-// @flow
+import {Progress} from './progress';
 
-import type {Progress} from './progress';
+export default class ProgressTracker implements Progress {
+    private readonly total: number;
+    private current: number;
+    private startTime: number;
+    private endTime: number | null;
 
-class ProgressTracker implements Progress {
-    total: number;
-    current: number;
-    startTime: number;
-    endTime: ?number;
-
-    constructor(total: number): void {
+    constructor(total: number) {
         this.total = total;
         this.current = 0;
-        this.start();
+        this.startTime = Date.now();
+        this.endTime = null;
     }
 
     start(): void {
@@ -44,12 +43,10 @@ class ProgressTracker implements Progress {
             : this.endTime - this.startTime;
     }
 
-    getEtaTime(): ?number {
+    getEtaTime(): number | null {
         const etaTime = this.getRemainingPercentage() * this.getRunningTime() / this.getPercentage();
         return Number.isFinite(etaTime) && !Number.isNaN(etaTime)
             ? etaTime
             : null;
     }
 }
-
-export default ProgressTracker;
