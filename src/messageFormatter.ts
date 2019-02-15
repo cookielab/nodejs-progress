@@ -1,7 +1,7 @@
-import prettyBytes from 'pretty-bytes';
-import prettyMs from 'pretty-ms';
 import ProgressTracker from './ProgressTracker';
 import RateTracker from './RateTracker';
+import prettyBytes from 'pretty-bytes';
+import prettyMs from 'pretty-ms';
 
 const formatMemory = (): string => {
     const memory = process.memoryUsage().rss;

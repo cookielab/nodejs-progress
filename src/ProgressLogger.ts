@@ -1,7 +1,7 @@
 import * as messageFormatter from './messageFormatter';
+import {Progress} from './progress';
 import ProgressTracker from './ProgressTracker';
 import RateTracker from './RateTracker';
-import {Progress} from './progress';
 
 interface LogFunction {
     (message: string): void;
