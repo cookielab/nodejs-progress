@@ -1,7 +1,8 @@
 import ProgressTracker from './ProgressTracker';
 import RateTracker from './RateTracker';
-import prettyBytes from 'pretty-bytes';
-import prettyMs from 'pretty-ms';
+
+import prettyBytes = require('pretty-bytes'); // eslint-disable-line @typescript-eslint/no-require-imports
+import prettyMs = require('pretty-ms'); // eslint-disable-line @typescript-eslint/no-require-imports
 
 const formatMemory = (): string => {
 	const memory = process.memoryUsage().rss;
