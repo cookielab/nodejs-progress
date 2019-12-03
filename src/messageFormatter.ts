@@ -35,7 +35,7 @@ const format = (tracker: ProgressTracker | RateTracker, precision?: number): str
 	}
 
 	// @ts-ignore
-	throw new Error(`Unexpected instance of tracker "${tracker.constructor.name}".`);
+	throw new Error(`Unexpected instance of tracker "${String(tracker.constructor.name)}".`);
 };
 
 export {
