@@ -41,8 +41,9 @@ export default class ProgressLogger implements Progress {
 	}
 
 	public enableIntervalLogging(logFunction: LogFunction, interval: number): void {
-		this.logCallback = () => logFunction(this.message());
-		this.intervalID = setInterval(this.logCallback, interval);
+		const logCallback = (): void => logFunction(this.message());
+		this.logCallback = logCallback;
+		this.intervalID = setInterval(logCallback, interval);
 	}
 
 	public enableOnTickLogging(logFunction: LogFunction): void {
