@@ -22,11 +22,11 @@
   },
   "dependencies": {
     "pretty-bytes": "^5.2.0",
-    "pretty-ms": "^5.0.0"
+    "pretty-ms": "^6.0.0"
   },
   "devDependencies": {
     "@cookielab.io/eslint-config-server": "4.0.0",
-    "@types/jest": "24.9.1",
+    "@types/jest": "25.1.2",
     "@types/node": "13.7.1",
     "@typescript-eslint/eslint-plugin": "2.20.0",
     "@typescript-eslint/parser": "2.20.0",
@@ -36,8 +36,8 @@
     "eslint-plugin-import": "2.20.1",
     "eslint-plugin-sort-imports-es6-autofix": "0.5.0",
     "flowgen": "1.10.0",
-    "jest": "24.9.0",
-    "ts-jest": "24.3.0",
+    "jest": "25.1.0",
+    "ts-jest": "25.2.0",
     "typescript": "3.7.5"
   },
   "jest": {
