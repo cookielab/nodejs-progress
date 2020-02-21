@@ -74,7 +74,7 @@ Used to stop logger measuring and logging.
 #### `tick(count: number = 1): void`
 Used to track progress change. You can specify number of operations performed. If not, 1 is used.
 
-####`.enableOnTickLogging(logFunction: (message: string) => void): void`
+#### `.enableOnTickLogging(logFunction: (message: string) => void): void`
 Used to enable logging when `.tick()` method is called.
 Parameter `logFunction` specifies the function that is called each time a `tick` method is called.
 
